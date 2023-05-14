@@ -6,22 +6,23 @@ from catalog.models import Product
 class Command(BaseCommand):
 
     def handle(self, *args, **options):
+        print("Привет! Заполняем базу начальными значениями")
         products_list = [
             {
                 "name": "манго",
                 "description": "плоды растений рода Манго семейства Анакардиевые",
                 "category": "фрукты",
-                "price": 170,
-                "date_of_creation": "2022-07-10 11:00",
-                "date_of_change": "2022-05-24 20:15"
+                "unit_price": 170,
+                "creation_date": "2022-07-10",
+                "modified_date": "2023-05-14"
             },
             {
                 "name": "Сыр",
                 "description": "Однолетнее травянистое растение, вид рода Огурец семейства Тыквенные, овощная культура",
                 "category": "овощи",
-                "price": 116,
-                "date_of_creation": "2022-04-16 19:00",
-                "date_of_change": "2022-05-14 20:17"
+                "unit_price": 116,
+                "creation_date": "2022-04-16",
+                "modified_date": "2023-05-14"
             },
         ]
 
