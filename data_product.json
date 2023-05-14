@@ -1,0 +1,41 @@
+[
+  {
+    "model": "catalog.product",
+    "pk": 1,
+    "fields": {
+      "name": "мандарин",
+      "description": "выращен в Марокко",
+      "image": "",
+      "category": "фрукты",
+      "unit_price": 120,
+      "creation_date": "2022-07-12",
+      "modified_date": "2023-05-14"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 2,
+    "fields": {
+      "name": "капуста",
+      "description": "производство Турция",
+      "image": "",
+      "category": "овощ",
+      "unit_price": 35,
+      "creation_date": "2022-05-14",
+      "modified_date": "2023-05-14"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 3,
+    "fields": {
+      "name": "арбуз",
+      "description": "производство Азербайджан",
+      "image": "",
+      "category": "ягоды",
+      "unit_price": 17,
+      "creation_date": "2023-01-12",
+      "modified_date": "2023-05-14"
+    }
+  }
+]

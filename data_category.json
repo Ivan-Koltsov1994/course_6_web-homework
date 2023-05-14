@@ -1,0 +1,26 @@
+[
+  {
+    "model": "catalog.category",
+    "pk": 1,
+    "fields": {
+      "name": "овощи",
+      "description": "Здесь будут овощи"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+      "name": "ягоды",
+      "description": "Здесь будут яголы"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 3,
+    "fields": {
+      "name": "фрукты",
+      "description": "Здесь будут фрукты"
+    }
+  }
+]
