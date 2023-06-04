@@ -15,10 +15,6 @@ class PostListView(ListView):
 class PostDetailView(DetailView):
     model = Post
 
-    def get_object(self, **kwargs):
-        views = super().get_object()
-        views.increase_view_count()
-        return views
 
 class PostCreateView(CreateView):
     model = Post
@@ -38,7 +34,7 @@ class PostDeleteView(DeleteView):
 class PostUpdateView(UpdateView):
     model = Post
     fields = ('name', 'content', 'image', 'published')
-    success_url = reverse_lazy('blog:posts_list')
+    success_url = reverse_lazy('blog:post_list')
 
 
 def toggle_publish(pk):

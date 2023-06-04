@@ -12,9 +12,13 @@ class Post(models.Model):
     view_count = models.PositiveIntegerField(verbose_name='количество просмотров', default=0)
 
     def __str__(self):
-        return f'{self.title}'
+        return f'{self.name}'
 
     class Meta:
         verbose_name = 'Пост'
         verbose_name_plural = 'Посты'
         ordering = ('-created_at',)
+
+    def increase_views(self):    # увеличение количества просмотров
+        self.views += 1
+        self.save()
