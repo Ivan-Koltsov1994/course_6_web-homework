@@ -10,8 +10,8 @@ class Product(models.Model):
     image = models.ImageField(upload_to='products/', verbose_name='Изображение', **NULLABLE)
     category = models.CharField(max_length=50, verbose_name='Категория')
     unit_price = models.IntegerField(verbose_name='Цена за покупку')
-    creation_date = models.DateField(verbose_name='Дата создания')
-    modified_date = models.DateField(verbose_name='Дата последнего изменения')
+    creation_date = models.DateField(verbose_name='Дата создания',auto_now=True)
+    modified_date = models.DateField(verbose_name='Дата последнего изменения',auto_now_add=True)
 
     def __str__(self):
         return f'{self.name} {self.category} {self.unit_price} {self.modified_date}'

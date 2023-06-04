@@ -6,35 +6,36 @@
         <div class="card">
             <div class="card-body">
                 <table class="table">
+
                     <tr>
                         <td>Наименование</td>
-                        <td>{{ title }}</td>
+                        <td>{{ object.name }}</td>
                     </tr>
                     <tr>
                         <td>Описание</td>
-                        <td>{{ desc }}</td>
+                        <td>{{ object.description }}</td>
                     </tr>
                     <tr>
                         <td>Категория</td>
-                        <td>{{ category }}</td>
+                        <td>{{ object.category }}</td>
                     </tr>
                     <tr>
                         <td>Цена</td>
-                        <td>{{ price }} руб</td>
+                        <td>{{ object.unit_price }} руб</td>
                     </tr>
                     <tr>
                         <td>Дата создания</td>
-                        <td>{{ create_date }}</td>
+                        <td>{{ object.creation_date }}</td>
                     </tr>
                     <tr>
                         <td>Дата изменения</td>
-                        <td>{{ change_date }}</td>
+                        <td>{{ object.modified_date }}</td>
                     </tr>
                 </table>
             </div>
         </div>
         <div class="card-footer">
-            <a href="{% url 'catalog:home' %}" class="btn btn-primary"><< Назад</a>
+            <a href="{% url 'catalog:product_list' %}" class="btn btn-primary"><< Назад</a>
         </div>
     </div>
 {% endblock %}

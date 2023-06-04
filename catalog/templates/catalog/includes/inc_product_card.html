@@ -14,7 +14,9 @@
                         </ul>
                         <button type="button" class="btn btn-lg btn-block btn-outline-primary"><a class="text-muted" href="mailto:ivan.koltsov.1994@gmail.com" target="_blank" title="Закажите наш товар, связавшись с нами">Купить товар</a></button>
                     </div>
-                    <p><a class="btn btn-secondary" href="{% url 'catalog:product' object.pk %}">Посмотреть &raquo;</a></p>
+                    <p><a class="btn btn-secondary" href="{% url 'catalog:product_detail' object.pk %}">Посмотреть &raquo;</a></p>
+                    <p><a class="btn btn-warning" href="{% url 'catalog:product_update' object.pk %}">Изменить &raquo;</a></p>
+                    <p><a class="btn btn-danger" href="{% url 'catalog:product_delete' object.pk %}">Удалить &raquo;</a></p>
                 </div>
             </div>
         </div>
