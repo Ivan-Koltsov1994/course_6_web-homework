@@ -16,4 +16,6 @@ class Record(models.Model):
         return f'{self.title}'
 
     class Meta:
-        """Класс мета-настроек"""
+        verbose_name = 'Пост'
+        verbose_name_plural = 'Посты'
+        ordering = ('-date_of_creation',)
