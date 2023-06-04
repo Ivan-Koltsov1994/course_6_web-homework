@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404, reverse , redirect
 from catalog.models import Product,  Category
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy, reverse
@@ -8,7 +8,6 @@ class ProductListView(ListView):
     model = Product
     extra_context = {
         'title': 'Все продукты',
-        'object_list': Product.objects.all()
     }
 
     def get_queryset(self):
@@ -43,6 +42,18 @@ class ProductDeleteView(DeleteView):
     """Класс для удаления Продуктов"""
     model = Product
     success_url = reverse_lazy('catalog:product_list')
+
+def toggle_activity(request, pk):
+    product_item = get_object_or_404(Product,pk=pk)
+    if product_item.is_active:
+        product_item.is_active = False
+    else:
+        product_item.is_active = True
+
+    product_item.save()
+
+    return redirect(reverse('catalog:product_detail',args=[product_item.pk]))
+
 
 # def home(request):
 #
