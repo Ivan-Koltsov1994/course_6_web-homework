@@ -13,8 +13,15 @@ class Product(models.Model):
     creation_date = models.DateField(verbose_name='Дата создания',auto_now=True)
     modified_date = models.DateField(verbose_name='Дата последнего изменения',auto_now_add=True)
 
+    #поле определения активных студентов
+    is_active = models.BooleanField(verbose_name='активный', default=True)
+
     def __str__(self):
         return f'{self.name} {self.category} {self.unit_price} {self.modified_date}'
+
+    def delete(self, *args, **kwargs):
+        self.is_active = False
+        self.save()
 
     class Meta:
         """Класс мета-настроек"""

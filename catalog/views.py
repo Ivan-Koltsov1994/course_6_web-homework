@@ -4,14 +4,20 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.urls import reverse_lazy, reverse
 
 class ProductListView(ListView):
+    """Класс для работы с моделью Продуктов"""
     model = Product
     extra_context = {
         'title': 'Все продукты',
         'object_list': Product.objects.all()
     }
 
+    def get_queryset(self):
+        queryset= super().get_queryset()
+        queryset =queryset.filter(is_active = True)
+        return queryset
 
 class ProductDetailView(DetailView):
+    """Класс для получение деталей модели Продуктов"""
     model = Product
     def get_context_data(self,*args, **kwargs):
         context_data = super().get_context_data(*args, **kwargs)
@@ -20,18 +26,21 @@ class ProductDetailView(DetailView):
 
 
 class ProductCreateView(CreateView):
+    """Класс для создания продуктов Продуктов"""
     model = Product
     fields = ('name', 'description', 'image', 'category','unit_price')
     success_url = reverse_lazy('catalog:product_list')
 
 
 class ProductUpdateView(UpdateView):
+    """Класс для обновления  Продуктов"""
     model = Product
     fields = ('name', 'description', 'image', 'category','unit_price')
     success_url = reverse_lazy('catalog:product_list')
 
 
 class ProductDeleteView(DeleteView):
+    """Класс для удаления Продуктов"""
     model = Product
     success_url = reverse_lazy('catalog:product_list')
 
