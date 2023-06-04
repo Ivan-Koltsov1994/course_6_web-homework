@@ -1,11 +1,11 @@
 from django.contrib import admin
 
-from blog.models import Record
+from blog.models import Post
 
 
-@admin.register(Record)
+@admin.register(Post)
 class RecordAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title','slug', 'content')
-    list_filter = ('title',)
-    search_fields = ('title',)
+    list_display = ('id', 'name','slug', 'content')
+    list_filter = ('name',)
+    search_fields = ('name',)
 
