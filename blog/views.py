@@ -49,7 +49,9 @@ class PostDeleteView(DeleteView):
 class PostUpdateView(UpdateView):
     model = Post
     fields = ('name', 'content', 'image', 'published')
-    success_url = reverse_lazy('blog:post_list')
+
+    def get_success_url(self):
+        return reverse('blog:post_item', args=[str(self.object.pk)])
 
 
 def toggle_publish(pk):
