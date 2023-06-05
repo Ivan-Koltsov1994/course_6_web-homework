@@ -1,6 +1,7 @@
 {% extends 'catalog/base.html' %}
-
+{% load mediapath %}
 {% block content %}
+    <img class="rounded-circle" src="{% mediapath 'image/product.avif' %}" alt="Картинка" width="120" height="500">
     <div class="col-12">   <!-- кнопка Создать студента -->
         <a href="{% url 'catalog:product_create' %}" class="btn btn-primary m-12">Создать продукт</a>
     </div>
