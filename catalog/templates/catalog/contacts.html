@@ -2,9 +2,11 @@
 <body>
 
     {% block content %}
-    <h1>Обратная связь</h1>
+   <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h1 class="display-12">Свяжитесь с нами</h1>
+</div>
     {% load mediapath %}
-    <img class="rounded-circle" src="{% mediapath 'image/contact.png' %}" alt="Картинка" width="20" height="500">
+    <img class="rounded-circle" src="{% mediapath 'image/contact.png' %}" alt="Картинка" width="10" height="600">
     <p>Заполните эту форму, чтобы связаться с нами.</p>
     <form>
         <label for="name">Имя:</label>
