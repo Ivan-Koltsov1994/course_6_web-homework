@@ -12,8 +12,20 @@ class PostListView(ListView):
         queryset = queryset.filter(published=True)
         return queryset
 
+
 class PostDetailView(DetailView):
     model = Post
+
+    def get_context_data(self, **kwargs):
+        """Функция для получения контекта"""
+        context_data = super().get_context_data(**kwargs)
+        context_data['name'] = self.get_object()
+        obj = self.get_object()
+        increase = get_object_or_404(Post, pk=obj.pk)  # увеличение количества просмотров
+        increase.increase_views()
+        # if increase.increase_views == 100:
+        #     send_email(increase)  # отправка письма
+        return context_data
 
 
 class PostCreateView(CreateView):
@@ -22,14 +34,17 @@ class PostCreateView(CreateView):
     fields = ('name', 'content', 'image', 'published')
     success_url = reverse_lazy('blog:post_list')
 
+
 class PostUpdateView(UpdateView):
     model = Post
     fields = ('name', 'content', 'image', 'published')
     success_url = reverse_lazy('blog:post_list')
 
+
 class PostDeleteView(DeleteView):
     model = Post
     success_url = reverse_lazy('blog:post_list')
+
 
 class PostUpdateView(UpdateView):
     model = Post
