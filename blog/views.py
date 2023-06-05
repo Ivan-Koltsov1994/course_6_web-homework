@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy, reverse
 from blog.models import Post
+from blog.services import send_post_email
 
 
 class PostListView(ListView):
@@ -17,15 +18,16 @@ class PostDetailView(DetailView):
     model = Post
 
     def get_context_data(self, **kwargs):
-        """Функция для получения контекта"""
+        """Функция для получения контекта c целью увеличения кол-ва просмотров"""
         context_data = super().get_context_data(**kwargs)
         context_data['name'] = self.get_object()
         obj = self.get_object()
-        increase = get_object_or_404(Post, pk=obj.pk)  # увеличение количества просмотров
-        increase.increase_views()
-        # if increase.increase_views == 100:
-        #     send_email(increase)  # отправка письма
+        increase = get_object_or_404(Post, pk=obj.pk)
+        increase.increase_views() # увеличение количества просмотров
+        if increase.increase_views == 50:
+            send_post_email(increase)  # отправка письма
         return context_data
+
 
 
 class PostCreateView(CreateView):
