@@ -8,6 +8,7 @@ register = template.Library()
 def mediapath(image):
     return f"{settings.MEDIA_URL}{image}"
 
+
 @register.filter
 def mediapath(value):
     return f"{settings.MEDIA_URL}{value}"

@@ -1,9 +1,9 @@
 {% extends 'catalog/base.html' %}
-{% load mediapath %}
+{% load mediapath_post %}
 {% block content %}
 <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
     <h1 class="display-12">Список публикаций</h1>
-    <img class="rounded-circle" src="{% mediapath 'image/post.jpg' %}" alt="Картинка" width="300" height="300">
+    <img class="rounded-circle" src="{% mediapath_post 'image/post.jpg' %}" alt="Картинка" width="300" height="300">
 </div>
 
 <div class="col-12">

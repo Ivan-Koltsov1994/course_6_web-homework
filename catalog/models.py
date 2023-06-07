@@ -8,7 +8,7 @@ class Product(models.Model):
     """Класс модели Продукта"""
     name = models.CharField(max_length=50, verbose_name='Наименование')
     description = models.TextField(verbose_name='Описание')
-    image = models.ImageField(upload_to='products/', verbose_name='Изображение', **NULLABLE)
+    image = models.ImageField(upload_to='catalog/', verbose_name='Изображение', **NULLABLE)
     category = models.CharField(max_length=50, verbose_name='Категория')
     unit_price = models.IntegerField(verbose_name='Цена за покупку')
     creation_date = models.DateField(verbose_name='Дата создания',auto_now=True)

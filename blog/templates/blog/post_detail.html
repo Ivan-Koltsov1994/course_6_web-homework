@@ -1,6 +1,6 @@
 {% extends 'catalog/base.html' %}
 
-{% load mediapath_posts %}
+{% load mediapath_post %}
 
 {% block content %}
     <div class="col">
@@ -17,7 +17,7 @@
                     </tr>
                     <tr>
                         <td>Изображение</td>
-                        <td><p><img src="{% mediapath object.image %}" width="150" height="120" alt="Картинка"></p></td>
+                        <td><p><img src="{% mediapath_post object.image %}" width="150" height="120" alt="Картинка"></p></td>
                     </tr>
                     <tr>
                         <td>Дата публикации</td>
