@@ -2,6 +2,7 @@ from django.shortcuts import render,get_object_or_404, reverse , redirect
 from catalog.models import Product,  Category
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy, reverse
+from catalog.forms import ProductForms
 
 class ProductListView(ListView):
     """Класс для работы с моделью Продуктов"""
@@ -27,14 +28,16 @@ class ProductDetailView(DetailView):
 class ProductCreateView(CreateView):
     """Класс для создания продуктов Продуктов"""
     model = Product
-    fields = ('name', 'description', 'image', 'category','unit_price')
+    form_class = ProductForms
+    # fields = ('name', 'description', 'image', 'category','unit_price')
     success_url = reverse_lazy('catalog:product_list')
 
 
 class ProductUpdateView(UpdateView):
     """Класс для обновления  Продуктов"""
     model = Product
-    fields = ('name', 'description', 'image', 'category','unit_price')
+    form_class = ProductForms
+    # fields = ('name', 'description', 'image', 'category','unit_price')
     success_url = reverse_lazy('catalog:product_list')
 
 
