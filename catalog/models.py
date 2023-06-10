@@ -18,7 +18,7 @@ class Product(models.Model):
     is_active = models.BooleanField(verbose_name='активный', default=True)
 
     def __str__(self):
-        return f'{self.name} {self.category} {self.unit_price} {self.modified_date}'
+        return f'{self.name} '
 
     def delete(self, *args, **kwargs):
         self.is_active = False
