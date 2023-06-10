@@ -46,7 +46,7 @@ class VersionForm(FormStyleMixin,forms.ModelForm):
         """Проверка валидности только одной активная версия продукта"""
         cleaned_data = self.cleaned_data['is_active']
 
-        if cleaned_data == self.instance.product.version_set.filter(is_active=True).exclude(
+        if cleaned_data and self.instance.product.version_set.filter(is_active=True).exclude(
                 id=self.instance.id).exists():
             raise forms.ValidationError('Может существовать только одна активная версия.')
         return cleaned_data
