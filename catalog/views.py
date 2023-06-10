@@ -1,8 +1,10 @@
 from django.shortcuts import render,get_object_or_404, reverse , redirect
-from catalog.models import Product,  Category
+from catalog.models import Product,  Category,Version
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.forms import inlineformset_factory
+
 from django.urls import reverse_lazy, reverse
-from catalog.forms import ProductForms
+from catalog.forms import ProductForms,VersionForm
 
 class ProductListView(ListView):
     """Класс для работы с моделью Продуктов"""
@@ -37,9 +39,20 @@ class ProductUpdateView(UpdateView):
     """Класс для обновления  Продуктов"""
     model = Product
     form_class = ProductForms
+    template_name = 'catalog/product_form_with_formset.html'
     # fields = ('name', 'description', 'image', 'category','unit_price')
     success_url = reverse_lazy('catalog:product_list')
 
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        VersionFormset = inlineformset_factory(Product,Version,form=VersionForm,extra=1)
+        if self.request.method == 'POST':
+            context_data['formset'] = VersionFormset(self.request.POST, instance=self.object)
+        else:
+            context_data['formset'] = VersionFormset(instance=self.object)
+        return context_data
+
+        return context_data
 
 class ProductDeleteView(DeleteView):
     """Класс для удаления Продуктов"""

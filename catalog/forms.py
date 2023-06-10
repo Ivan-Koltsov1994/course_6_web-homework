@@ -1,6 +1,6 @@
 from django import forms
 
-from catalog.models import Product
+from catalog.models import Product, Version
 
 #Cписок запрещенных слов
 stop_words = ['казино', 'криптовалюта', 'крипта', 'биржа', 'дешево', 'бесплатно', 'обман', 'полиция', 'радар']
@@ -25,3 +25,9 @@ class ProductForms(forms.ModelForm):
         if cleaned_data in stop_words:
             raise forms.ValidationError('Запрещенное описание')
         return cleaned_data
+
+
+class VersionForm(forms.ModelForm):
+    class Meta:
+        model = Version
+        fields = '__all__'
