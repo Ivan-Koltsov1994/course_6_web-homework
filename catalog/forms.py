@@ -5,7 +5,17 @@ from catalog.models import Product, Version
 #Cписок запрещенных слов
 stop_words = ['казино', 'криптовалюта', 'крипта', 'биржа', 'дешево', 'бесплатно', 'обман', 'полиция', 'радар']
 
-class ProductForms(forms.ModelForm):
+
+class FormStyleMixin:
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        for field_name, field in self.fields.items():
+            field.widget.attrs['class'] = 'form-control'
+
+
+class ProductForms(FormStyleMixin,forms.ModelForm):
     class Meta:
         model = Product
         fields = '__all__'
@@ -27,7 +37,16 @@ class ProductForms(forms.ModelForm):
         return cleaned_data
 
 
-class VersionForm(forms.ModelForm):
+class VersionForm(FormStyleMixin,forms.ModelForm):
     class Meta:
         model = Version
         fields = '__all__'
+
+    def clean_is_active(self):
+        """Проверка валидности только одной активная версия продукта"""
+        cleaned_data = self.cleaned_data['is_active']
+
+        if cleaned_data == self.instance.product.version_set.filter(is_active=True).exclude(
+                id=self.instance.id).exists():
+            raise forms.ValidationError('Может существовать только одна активная версия.')
+        return cleaned_data
