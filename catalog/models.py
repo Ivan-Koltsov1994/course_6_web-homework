@@ -58,5 +58,5 @@ class Version(models.Model):
 
     class Meta:
         """Класс мета-настроек"""
-        verbose_name = 'Версия'
-        verbose_name_plural = 'Версии'
+        verbose_name = 'версия'
+        verbose_name_plural = 'версии'
