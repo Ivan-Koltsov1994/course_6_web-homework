@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     'catalog',
     'blog',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -138,3 +139,6 @@ EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 EMAIL_USE_SSL = True
 EMAIL_USE_TLS = False
+
+# Настройки для работы с моделью пользователя
+AUTH_USER_MODEL = 'users.User'
