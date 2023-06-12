@@ -9,5 +9,5 @@ def send_post_email(post_item: Post):
         f'Пост {post_item.name} набрал 100 просмотров ',
         'Поздравляю! Ваша запись пользуется популярностью!',
         settings.EMAIL_HOST_USER,
-        recipient_list=['EMAIL_HOST_USER']  # [user.email]
+        recipient_list=[settings.EMAIL_HOST_USER]
     )
