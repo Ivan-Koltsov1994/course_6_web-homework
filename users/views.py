@@ -62,6 +62,7 @@ def activate_user(request, token):
     return render(request, 'users/user_not_found.html')
 
 
+
 def generate_new_password(request):
     """Метод генерирует новый пароль и отправляет на почту пользователя"""
     pass_ch = secrets.token_urlsafe(18)[:9]
