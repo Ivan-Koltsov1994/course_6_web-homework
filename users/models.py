@@ -6,6 +6,8 @@ from django.db import models
 from catalog.models import NULLABLE
 
 class UserManager(BaseUserManager):
+    """ Переопределение модели для команды python manage.py createsuperuser (для
+    # поля email"""
     use_in_migrations = True
 
     def _create_user(self, email, password, **extra_fields):
@@ -48,8 +50,10 @@ class User(AbstractUser):
     username = None
     email = models.EmailField(unique=True, verbose_name='почта')
     avatar = models.ImageField(upload_to='users/', verbose_name='аватар', **NULLABLE)
-    phone = models.CharField(max_length=35, verbose_name='телефон')
-    country = models.CharField(max_length=100, verbose_name='страна')
+    phone = models.CharField(max_length=35, verbose_name='телефон', **NULLABLE)
+    country = models.CharField(max_length=100, verbose_name='страна', **NULLABLE)
+    token = models.CharField(max_length=15, verbose_name='токен', **NULLABLE)
+    token_time = models.DateTimeField(auto_now_add=True, verbose_name='время создания токена', **NULLABLE)
 
     # Переопределение настроек для авторизации и регистрации через модель
     USERNAME_FIELD = "email"
@@ -64,3 +68,6 @@ class User(AbstractUser):
     class Meta:
         verbose_name = 'Пользователь'
         verbose_name_plural = 'Пользователи'
+        unique_together = ('email', 'phone')
+        ordering = ('email',)  # сортировка, '-email' - сортировка в обратном порядке
+
