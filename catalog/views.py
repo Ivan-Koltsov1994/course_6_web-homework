@@ -34,6 +34,11 @@ class ProductCreateView(CreateView):
     # fields = ('name', 'description', 'image', 'category','unit_price')
     success_url = reverse_lazy('catalog:product_list')
 
+    def form_valid(self, form):
+        """Метод добавления создателя продукта"""
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
 
 class ProductUpdateView(UpdateView):
     """Класс для обновления  Продуктов"""

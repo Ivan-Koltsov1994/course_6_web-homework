@@ -64,7 +64,7 @@ def activate_user(request, token):
 
 def generate_new_password(request):
     """Метод генерирует новый пароль и отправляет на почту пользователя"""
-    pass_ch = secrets.token_urlsafe(18)[:9]
+    pass_ch = secrets.token_urlsafe(18)[:12]
     send_mail(
         subject='Смена пароля',
         message=f'Ваш новый пароль {pass_ch}',
