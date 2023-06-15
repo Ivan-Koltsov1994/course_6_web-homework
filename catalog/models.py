@@ -13,6 +13,7 @@ class Product(models.Model):
     unit_price = models.IntegerField(verbose_name='Цена за покупку')
     creation_date = models.DateField(verbose_name='Дата создания',auto_now=True)
     modified_date = models.DateField(verbose_name='Дата последнего изменения',auto_now_add=True)
+    user = models.CharField(max_length=50, verbose_name='Создатель', **NULLABLE)
 
     #поле определения активных студентов
     is_active = models.BooleanField(verbose_name='активный', default=True)

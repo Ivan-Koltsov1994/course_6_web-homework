@@ -5,8 +5,10 @@
     <h1 class="display-12">Каталог товаров</h1>
 </div>
     <img class="rounded-circle" src="{% mediapath 'image/product.avif' %}" alt="Картинка" width="120" height="500">
-    <div class="col-12">   <!-- кнопка Создать студента -->
+    <div class="col-12">   <!-- кнопка Создать продукт -->
+        {% if user.is_authenticated %}
         <a href="{% url 'catalog:product_create' %}" class="btn btn-primary m-12">Создать продукт</a>
+        {% endif %}
     </div>
 {% for object in object_list %}
     {% include 'catalog/includes/inc_product_card.html' %}

@@ -24,8 +24,10 @@
 
                         </ul>
                     <p><a class="btn btn-secondary" href="{% url 'catalog:product_detail' object.pk %}">Посмотреть &raquo;</a></p>
+                     {% if user.is_authenticated %}
                     <p><a class="btn btn-warning" href="{% url 'catalog:product_update' object.pk %}">Изменить &raquo;</a></p>
                     <p><a class="btn btn-danger" href="{% url 'catalog:product_delete' object.pk %}">Удалить &raquo;</a></p>
+                    {% endif %}
                 </div>
             </div>
         </div>
