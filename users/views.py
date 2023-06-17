@@ -1,6 +1,7 @@
 import secrets
 
 from django.contrib.auth.forms import UserChangeForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.mail import send_mail
 from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse_lazy, reverse
@@ -12,7 +13,7 @@ from users.models import User
 from users.services import confirm_account
 
 
-class ProfileUpdateView(UpdateView):
+class ProfileUpdateView(LoginRequiredMixin,UpdateView):
     model = User
     form_class = UserChangeForm
     success_url = reverse_lazy('catalog:product_list')

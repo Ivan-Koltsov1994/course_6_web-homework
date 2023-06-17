@@ -2,7 +2,7 @@ from django import forms
 
 from catalog.models import Product, Version
 
-#Cписок запрещенных слов
+# Cписок запрещенных слов
 stop_words = ['казино', 'криптовалюта', 'крипта', 'биржа', 'дешево', 'бесплатно', 'обман', 'полиция', 'радар']
 
 
@@ -15,7 +15,7 @@ class FormStyleMixin:
             field.widget.attrs['class'] = 'form-control'
 
 
-class ProductForms(FormStyleMixin,forms.ModelForm):
+class ProductForms(FormStyleMixin, forms.ModelForm):
     class Meta:
         model = Product
         fields = '__all__'
@@ -37,7 +37,17 @@ class ProductForms(FormStyleMixin,forms.ModelForm):
         return cleaned_data
 
 
-class VersionForm(FormStyleMixin,forms.ModelForm):
+class ProductDescriptionForm(ProductForms):
+    class Meta:
+        model = Product
+        fields = ('description',)
+
+class ProductCategoryForm(ProductForms):
+    class Meta:
+        model = Product
+        fields = ('category',)
+
+class VersionForm(FormStyleMixin, forms.ModelForm):
     class Meta:
         model = Version
         fields = '__all__'

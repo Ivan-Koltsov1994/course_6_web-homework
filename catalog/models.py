@@ -15,8 +15,11 @@ class Product(models.Model):
     modified_date = models.DateField(verbose_name='Дата последнего изменения',auto_now_add=True)
     user = models.CharField(max_length=50, verbose_name='Создатель', **NULLABLE)
 
-    #поле определения активных студентов
+    # поле определения активных покупателей
     is_active = models.BooleanField(verbose_name='активный', default=True)
+
+    # поле определения активной публикации продукта
+    is_published = models.BooleanField(default=False, verbose_name='Признак публикации')
 
     def __str__(self):
         return f'{self.name} '
@@ -25,12 +28,29 @@ class Product(models.Model):
         self.is_active = False
         self.save()
 
+    def toggle_is_published(self):
+        self.is_published = not self.is_published
+        self.save()
+
     class Meta:
         """Класс мета-настроек"""
         verbose_name = 'продукт'
         verbose_name_plural = 'продукты'
         ordering = ('name',)  # сортировка, '-name' - сортировка в обратном порядке
-
+        permissions = [
+            (
+                'set_published_product',
+                'Can publish product'
+            ),
+            (
+                'change_description_product',
+                'Can change product description'
+            ),
+            (
+                'change_product_category',
+                'Can change product category'
+            )
+        ]
 
 class Category(models.Model):
     """Класс модели категории Продукта"""

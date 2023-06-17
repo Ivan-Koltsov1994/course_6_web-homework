@@ -1,12 +1,13 @@
-from django.shortcuts import render, get_object_or_404, redirect
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+
 from blog.models import Post
 from blog.services import send_post_email
-from config import settings
 
 
-class PostListView(ListView):
+class PostListView(LoginRequiredMixin, ListView):
     model = Post
 
     def get_queryset(self):
@@ -43,12 +44,13 @@ class PostUpdateView(UpdateView):
     def get_success_url(self):
         return self.object.get_absolute_url()
 
-class PostDeleteView(DeleteView):
+
+class PostDeleteView(LoginRequiredMixin, DeleteView):
     model = Post
     success_url = reverse_lazy('blog:post_list')
 
 
-class PostUpdateView(UpdateView):
+class PostUpdateView(LoginRequiredMixin, UpdateView):
     model = Post
     fields = ('name', 'content', 'image', 'published')
 

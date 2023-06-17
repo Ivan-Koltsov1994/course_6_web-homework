@@ -7,7 +7,8 @@
                         <h4 class="my-0 font-weight-normal">{{object.name}}</h4>
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title pricing-card-title"> {{object.unit_price}} ₽/Кг</h5>
+                        <h5 class="card-title pricing-card-title"> {{object.category}} </h5>
+                        <h6 class="card-title pricing-card-title"> {{object.unit_price}} ₽/Кг</h6>
                         <ul class="list-unstyled mt-3 mb-6 text-start m-1">
                             <li>{{object.description|slice:":100"}}</li>
                         </ul>
@@ -24,9 +25,18 @@
 
                         </ul>
                     <p><a class="btn btn-secondary" href="{% url 'catalog:product_detail' object.pk %}">Посмотреть &raquo;</a></p>
-                     {% if user.is_authenticated %}
-                    <p><a class="btn btn-warning" href="{% url 'catalog:product_update' object.pk %}">Изменить &raquo;</a></p>
-                    <p><a class="btn btn-danger" href="{% url 'catalog:product_delete' object.pk %}">Удалить &raquo;</a></p>
+                    {% if user.is_authenticated and object.user == user.email %}
+                        <p><a class="btn btn-warning" href="{% url 'catalog:product_update' object.pk %}">Изменить &raquo;</a></p>
+                    {% endif %}
+                    {% if perms.catalog.change_description_product %}
+                        <p><a class="btn btn-outline-secondary" href="{% url 'catalog:product_description' object.pk %}" >Изменить
+                        описание</a></p>
+                    {% endif %}
+                    {% if perms.catalog.change_description_product %}
+                        <p><a href="{% url 'catalog:change_description_product' object.pk %}" class="btn btn-outline-secondary">Изменить категорию продукта</a>
+                    {% endif %}
+                    {% if user.is_superuser %}
+                        <p><a class="btn btn-danger" href="{% url 'catalog:product_delete' object.pk %}">Удалить &raquo;</a></p>
                     {% endif %}
                 </div>
             </div>

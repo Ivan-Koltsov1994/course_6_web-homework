@@ -13,6 +13,7 @@
                     </tr>
                     <tr>
                         <td>Описание</td>
+                        {
                         <td>{{ object.description }}</td>
                     </tr>
                     <tr>
@@ -43,6 +44,21 @@
                     Активировать
                 {% endif %}
             </a>
+        </div>
+    </div>
+</div>
+<blockquote>
+
+</blockquote>
+    <div class="card-footer">
+        {% if perms.catalog.set_published_product %}
+            {% if object.is_published == True %}
+                <a href="{% url 'catalog:change_is_published' object.pk %}" class="btn btn-outline-danger float-lg-right">Снять
+                    с публикации</a>
+            {% else %}
+                <a href="{% url 'catalog:change_is_published' object.pk %}" class="btn btn-outline-primary ">Опубликовать</a>
+            {% endif %}
+        {% endif %}
         </div>
     </div>
 {% endblock %}

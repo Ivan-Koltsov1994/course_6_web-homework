@@ -24,6 +24,7 @@ class Post(models.Model):
         verbose_name_plural = 'Посты'
         ordering = ('name','slug','-created_at',)
 
+
     def increase_views(self):
         # Метод увеличивает количество просмотров
         self.view_count += 1
