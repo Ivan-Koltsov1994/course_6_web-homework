@@ -7,8 +7,8 @@ from blog.views import PostListView, PostDetailView, PostCreateView, PostUpdateV
 app_name = BlogConfig.name
 
 urlpatterns = [
-    path('blog/', cache_page(60)(PostListView.as_view()), name='post_list'),
-    path('blog/<slug:slug>/', never_cache(PostDetailView.as_view()), name='post_item'),
+    path('blog/', never_cache(PostListView.as_view()), name='post_list'),
+    path('blog/<slug:slug>/', cache_page(60)(PostDetailView.as_view()), name='post_item'),
     path('create/', PostCreateView.as_view(), name='post_create'),
     path('blog/update/<slug:slug>/', never_cache(PostUpdateView.as_view()), name='post_update'),
     path('blog/delete/<slug:slug>/', PostDeleteView.as_view(), name='post_delete'),
