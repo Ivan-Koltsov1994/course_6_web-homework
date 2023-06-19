@@ -149,6 +149,7 @@ LOGOUT_REDIRECT_URL = '../'
 LOGIN_URL = '/users/'
 
 # Настройки кеша
+CACHE_ENABLE = True
 CACHES = {
     "default": {
         "BACKEND": "django.core.cache.backends.redis.RedisCache",

@@ -5,7 +5,7 @@ from django.forms import inlineformset_factory
 from django.contrib.auth.mixins import LoginRequiredMixin,PermissionRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import permission_required
-
+from catalog.services import get_category_product_from_cashe
 from django.urls import reverse_lazy, reverse
 from catalog.forms import ProductForms,VersionForm,ProductDescriptionForm,ProductCategoryForm
 
@@ -20,6 +20,18 @@ class ProductListView(LoginRequiredMixin,ListView):
         queryset= super().get_queryset()
         queryset =queryset.filter(is_active = True)
         return queryset
+
+class CategoriesListView(ListView):
+    model = Category
+    extra_context = {
+        'title': 'Все категории',
+        'object_list': Category.objects.all()
+    }
+
+    def get_context_data(self, **kwargs):   # меняет title на __str__.object (категория продукта)
+        context_data = super().get_context_data(**kwargs)
+        context_data['subject_list'] = get_category_product_from_cashe    # логика вынесена в services.py ---------
+        return context_data
 
 @permission_required('catalog.set_published_product')
 def change_is_published(request, pk):

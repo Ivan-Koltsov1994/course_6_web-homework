@@ -7,9 +7,9 @@
                         <h4 class="my-0 font-weight-normal">{{object.name}}</h4>
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title pricing-card-title"> {{object.category}} </h5>
+                        <h5 class="card-title pricing-card-title"> {{object.category.name}} </h5>
                         <h6 class="card-title pricing-card-title"> {{object.unit_price}} ₽/Кг</h6>
-                        <ul class="list-unstyled mt-3 mb-6 text-start m-1">
+                        <ul class="list-unstyled mt-6 mb-12 text-start m-4">
                             <li>{{object.description|slice:":100"}}</li>
                         </ul>
                         <button type="button" class="btn btn-lg btn-block btn-outline-primary"><a class="text-muted" href="mailto:Ivan-Koltsov1994@yandex.ru" target="_blank" title="Закажите наш товар, связавшись с нами">Купить товар</a></button>
@@ -18,12 +18,12 @@
 
                             {% for version in object.version_set.all %}
                                  {% if version.is_active %}
-
                                     <div><strong>Активная версия: </strong> {{ version.number_version}} - {{ version.title_version}}</div>
                                  {% endif %}
                             {% endfor %}
 
-                        </ul>
+                    </ul>
+
                     <p><a class="btn btn-secondary" href="{% url 'catalog:product_detail' object.pk %}">Посмотреть &raquo;</a></p>
                     {% if user.is_authenticated and object.user == user.email %}
                         <p><a class="btn btn-warning" href="{% url 'catalog:product_update' object.pk %}">Изменить &raquo;</a></p>

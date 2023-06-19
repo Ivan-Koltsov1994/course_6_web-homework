@@ -13,12 +13,11 @@
                     </tr>
                     <tr>
                         <td>Описание</td>
-                        {
                         <td>{{ object.description }}</td>
                     </tr>
                     <tr>
                         <td>Категория</td>
-                        <td>{{ object.category }}</td>
+                        <td>{{ object.category.name }}</td>
                     </tr>
                     <tr>
                         <td>Цена</td>
@@ -53,13 +52,12 @@
     <div class="card-footer">
         {% if perms.catalog.set_published_product %}
             {% if object.is_published == True %}
-                <a href="{% url 'catalog:change_is_published' object.pk %}" class="btn btn-outline-danger float-lg-right">Снять
-                    с публикации</a>
+                <a href="{% url 'catalog:change_is_published' object.pk %}" class="btn btn-outline-danger float-lg-right">
+                    Снять с публикации</a>
             {% else %}
                 <a href="{% url 'catalog:change_is_published' object.pk %}" class="btn btn-outline-primary ">Опубликовать</a>
             {% endif %}
         {% endif %}
-        </div>
     </div>
 {% endblock %}
 </main>

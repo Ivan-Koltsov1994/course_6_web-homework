@@ -3,13 +3,26 @@ from django.db import models
 
 NULLABLE = {'blank': True, 'null': True}
 
+class Category(models.Model):
+    """Класс модели категории Продукта"""
+    name = models.CharField(max_length=50, verbose_name='Наименование')
+    description = models.TextField(verbose_name='Описание')
+
+    def __str__(self):
+        return f'{self.name} {self.description}'
+
+    class Meta:
+        """Класс мета-настроек"""
+        verbose_name = 'категория'
+        verbose_name_plural = 'категории'
+        ordering = ('name',)  # сортировка, '-name' - сортировка в обратном порядке
 
 class Product(models.Model):
     """Класс модели Продукта"""
     name = models.CharField(max_length=50, verbose_name='Наименование')
     description = models.TextField(verbose_name='Описание')
     image = models.ImageField(upload_to='catalog/', verbose_name='Изображение', **NULLABLE)
-    category = models.CharField(max_length=50, verbose_name='Категория')
+    category = models.ForeignKey(to='Category', on_delete=models.CASCADE, verbose_name='Категория')
     unit_price = models.IntegerField(verbose_name='Цена за покупку')
     creation_date = models.DateField(verbose_name='Дата создания',auto_now=True)
     modified_date = models.DateField(verbose_name='Дата последнего изменения',auto_now_add=True)
@@ -51,20 +64,6 @@ class Product(models.Model):
                 'Can change product category'
             )
         ]
-
-class Category(models.Model):
-    """Класс модели категории Продукта"""
-    name = models.CharField(max_length=50, verbose_name='Наименование')
-    description = models.TextField(verbose_name='Описание')
-
-    def __str__(self):
-        return f'{self.name} {self.description}'
-
-    class Meta:
-        """Класс мета-настроек"""
-        verbose_name = 'категория'
-        verbose_name_plural = 'категории'
-        ordering = ('name',)  # сортировка, '-name' - сортировка в обратном порядке
 
 
 class Version(models.Model):
