@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os
 from pathlib import Path
+from dotenv import load_dotenv
 
 from django.conf.global_settings import EMAIL_HOST
 
@@ -82,9 +83,9 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'project',
-        'USER': 'postgres',
-        'PASSWORD': 'bdfy09111994',
+        'NAME':  os.getenv("NAME_POSTGRES"),
+        'USER': os.getenv('USER_POSTGRES'),
+        'PASSWORD': os.getenv('PASSWORD_POSTGRES'),
         'HOST': 'localhost',
         'PORT': '5432',
     }
@@ -152,10 +153,10 @@ LOGOUT_REDIRECT_URL = '../'
 LOGIN_URL = '/users/'
 
 # Настройки кеша
-CACHE_ENABLE = True
+CACHE_ENABLE = os.getenv('CACHE_ENABLED') == 'True'
 CACHES = {
     "default": {
         "BACKEND": "django.core.cache.backends.redis.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379",
+        "LOCATION": os.getenv('CACHE_LOCATION'),
     }
 }
